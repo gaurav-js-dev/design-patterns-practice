@@ -1,6 +1,6 @@
-# Design Patter & Principles
+# Design Pattern & Principles
 
-This repo covers all the Gang of Four design patterns. Here's the full list of what is covered:
+### This repo covers all the Gang of Four design patterns. Here's the full list of what is covered:
 
 - **SOLID Design Principles**: Single Responsibility Principle, Open-Closed Principle, Liskov Substitution Principle, Interface Segregation Principle and Dependency Inversion Principle
 
@@ -14,4 +14,4 @@ This repo covers all the Gang of Four design patterns. Here's the full list of w
 
 - Most demos & code examples are single-file.
 
-- There is a dedicated folder for each pattern/principle and this folder contains 2 files. The file ending with **fixed** contains optimized code and other file contains the code before refactoring.
+- There is a dedicated folder for each pattern/principle and this folder contains 2 files. The file ending with **fixed** contains optimized code and other file contains the code before refactoring or when pattern was not applied.
