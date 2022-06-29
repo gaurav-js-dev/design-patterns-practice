@@ -85,7 +85,7 @@ j.addEntry("I ate an icecream.");
 console.log(j.toString());
 
 let p = new PersistenceManager();
-let filename = "c:/temp/journal.txt";
+let filename = "journal.txt";
 p.saveToFile(j, filename);
 ```
 
