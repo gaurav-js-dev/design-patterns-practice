@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 class Journal {
   constructor() {
     this.entries = {};
@@ -15,6 +17,18 @@ class Journal {
 
   toString() {
     return Object.values(this.entries).join("\n");
+  }
+
+  save(filename) {
+    fs.writeFileSync(filename, this.toString());
+  }
+
+  load(filename) {
+    // load file from OS
+  }
+
+  loadFromUrl(url) {
+    // load file from url
   }
 }
 

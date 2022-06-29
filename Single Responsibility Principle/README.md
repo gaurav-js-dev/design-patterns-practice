@@ -15,18 +15,15 @@ class Journal {
   }
 
   addEntry(text) {
-    let c = ++Journal.count;
-    let entry = `${c}: ${text}`;
-    this.entries[c] = entry;
-    return c;
+    // add an entry
   }
 
   removeEntry(index) {
-    delete this.entries[index];
+    // add an entry
   }
 
   toString() {
-    return Object.values(this.entries).join("\n");
+    // print entries line by line
   }
 
   save(filename) {
@@ -43,8 +40,57 @@ class Journal {
 }
 ```
 
-- So we know that if our files aren't being saved correctly, we are not going to be looking in like 10 different places.We are going to be looking inside the persistance manager.
+- And here you use the file system. But the problem is that subsequently you want to have additional interaction with the file system. You might want to load from a file name.Let's say you want to load from web. So the big problem with all of this is that you now added a second responsibility to the Journal class.
 
-- So this idea of **separation of concerns** is once again this idea that you have several different concerns like persistance or post-processing, parallelism or anything un-related.
+- Now, the problem with all of this is that imagine that a journal isn't the only object in your system.Imagine that you have 10 different types of objects that you want to serialize to files and load from files and maybe load from some other resource like url.How can you have common operations on all of these?
 
-- Lastly, we separate those into separate components so as to make the entire system easier to easier to figure out, easier to manage, easier to refactor as well.
+- It makes sense to take all of these operations related to persistence and make a class that's called persistance manager. You could have a class like this which has a save to file functionality for it, which might take a journal, it might take a file name, and then it would do pretty much the same thing.
+
+- In the below code we keep everything right where our persistance functionality is.
+
+```javascript
+class Journal {
+  constructor() {
+    this.entries = {};
+  }
+
+  addEntry(text) {
+    // add an entry
+  }
+
+  removeEntry(index) {
+    // add an entry
+  }
+
+  toString() {
+    // print entries line by line
+  }
+}
+// Below is the new class having single responsibility related to saving and loading files.
+Journal.count = 0;
+
+class PersistenceManager {
+  preprocess(j) {
+    //
+  }
+
+  saveToFile(journal, filename) {
+    fs.writeFileSync(filename, journal.toString());
+  }
+}
+
+let j = new Journal();
+j.addEntry("I smiled today.");
+j.addEntry("I ate an icecream.");
+console.log(j.toString());
+
+let p = new PersistenceManager();
+let filename = "c:/temp/journal.txt";
+p.saveToFile(j, filename);
+```
+
+- For eg if we run into issue if our files aren't being saved correctly, we are not going to be looking in like 10 different places for 10 objects. We are going to be looking inside the persistance manager class to fix our issue.
+
+- So this idea of **separation of concerns** is once again this idea that you have several different concerns like persistance or post-processing, parallelism or anything un-related as different services or classes.
+
+- Lastly, we separate those services or classes into separate components so as to make the entire system to easier to figure out, easier to manage, easier to refactor as well.
