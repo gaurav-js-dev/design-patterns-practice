@@ -29,9 +29,7 @@ let Size = Object.freeze({
 });
 ```
 
-- We want to be able to filter objects by certain criteria. Hence we built a **ProductFilter** class below.
-
-So ProductFilter is going to have a couple of methods which take a bunch of products as well as some criteria, and it is going to filter those product based on match.
+- We want to be able to filter objects by certain criteria. Hence we built a **ProductFilter** class below. So **ProductFilter** is going to have a couple of methods which take a bunch of products as well as some criteria, and it is going to filter those product based on match.
 
 ```javascript
 class ProductFilter {
