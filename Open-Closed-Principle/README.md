@@ -119,3 +119,43 @@ for (let p of bf.filter(products, new ColorSpecification(Color.green))) {
   console.log(` * ${p.name} is green`);
 }
 ```
+
+- If you wanted to filter all the large products, you would make size specification and in a similar fashion.
+
+```javascript
+class SizeSpecification {
+  constructor(size) {
+    this.size = size;
+  }
+
+  isSatisfied(item) {
+    return item.size === this.size;
+  }
+}
+console.log(`Large products:`);
+for (let p of bf.filter(products, new SizeSpecification(Size.large))) {
+  console.log(` * ${p.name} is large`);
+}
+```
+
+- Now, the question is, what about items which are large and green at the same time? Now, in order to implement this,we will use the specification pattern, we need to do build a combinator.Combinator is itself a specification which combines all the specifications.
+  So it's basically a class let's call it **AndSpecification**.
+
+```javascript
+// specification combinator
+class AndSpecification {
+  constructor(...specs) {
+    this.specs = specs;
+  }
+
+  isSatisfied(item) {
+    return this.specs.every((x) => x.isSatisfied(item));
+  }
+}
+
+console.log(`Large and green products:`);
+let spec = new AndSpecification(
+  new ColorSpecification(Color.green),
+  new SizeSpecification(Size.large)
+);
+```

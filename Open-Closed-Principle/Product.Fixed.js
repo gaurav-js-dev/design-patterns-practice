@@ -19,22 +19,6 @@ class Product {
   }
 }
 
-class ProductFilter {
-  filterByColor(products, color) {
-    return products.filter((p) => p.color === color);
-  }
-
-  filterBySize(products, size) {
-    return products.filter((p) => p.size === size);
-  }
-
-  filterBySizeAndColor(products, size, color) {
-    return products.filter((p) => p.size === size && p.color === color);
-  }
-
-  // 3 criteria (+weight) = 7 methods
-}
-
 let apple = new Product("Apple", Color.green, Size.small);
 let tree = new Product("Tree", Color.green, Size.large);
 let house = new Product("House", Color.blue, Size.large);
@@ -46,9 +30,33 @@ class BetterFilter {
     return items.filter((x) => spec.isSatisfied(x));
   }
 }
+class ColorSpecification {
+  constructor(color) {
+    this.color = color;
+  }
+  isSatisfied(item) {
+    return item.color === this.color;
+  }
+}
+
+class SizeSpecification {
+  constructor(size) {
+    this.size = size;
+  }
+
+  isSatisfied(item) {
+    return item.size === this.size;
+  }
+}
 
 let bf = new BetterFilter();
 console.log(`Green products (new):`);
 for (let p of bf.filter(products, new ColorSpecification(Color.green))) {
   console.log(` * ${p.name} is green`);
 }
+
+console.log(`Large and green products:`);
+let spec = new AndSpecification(
+  new ColorSpecification(Color.green),
+  new SizeSpecification(Size.large)
+);
