@@ -38,3 +38,34 @@ class ProductFilter {
   }
 }
 ```
+
+- We will make some products objects
+
+  1. An apple to be green and small.
+  2. A tree with green color and large.
+  3. House with blue color and large size
+
+- So we're going to have this above list of products. Let's put them into an array.
+
+```javascript
+let apple = new Product("Apple", Color.green, Size.small);
+let tree = new Product("Tree", Color.green, Size.large);
+let house = new Product("House", Color.blue, Size.large);
+
+let products = [apple, tree, house];
+```
+
+- Let's say we recieve a product requirement to filter by green color So what we can do now is we can find all the green products with below method inside our **ProductFilter** class. Below method will log all green color products like apple and house.
+
+```javascript
+class ProductFilter {
+  filterByColor(products, color) {
+    return products.filter((p) => p.color === color);
+  }
+}
+
+let pf = new ProductFilter();
+console.log(`Green products (old):`);
+for (let p of pf.filterByColor(products, Color.green))
+  console.log(` * ${p.name} is green`);
+```
