@@ -24,12 +24,28 @@ console.log(rc.toString());
 
 - You decide to also introduce a new concept called Square. But whenever working with a square, you want to enforce that the square always have the same width and height.
 
-- So Square is going to be a rectangle, but it's going to have a different constructor.
+- So Square is going to be a rectangle, but it's going to have a different constructor. So in the Square constructor you just specified has size argument and the size happens to be both the width and the height.So you specify both the width and the height size like below code.But here's the problem that if you assume that the square height width are always the same, you have to enforce it.
 
-So in the constructor you just specified size and the size happens to be both the width and the height.
+```javascript
+class Square extends Rectangle {
+  constructor(size) {
+    super(size, size);
+  }
+}
 
-So you specify both the width and the height size.
+let sq = new Square(5);
+console.log(sq.toString());
+// output undefined x undefined
+```
 
-But here's the problem.
+- This is the canonical demo of LSP. The problem here is the user of the code will not be aware at any place that a Square has been provided. They really don't know. So they cannot make assumptions. And the whole thing breaks down. There is a difference in actual and expected output.
 
-The problem is that if you assume that the square Highton width are always the same, you have to enforce
+```javascript
+let useIt = function (rc) {
+  let width = rc._width;
+  rc.height = 10;
+  console.log(`Expected area of ${10 * width}, ` + `got ${rc.area}`);
+};
+```
+
+- The entire idea of making a square, as opposed to just defining it as a special case of rectangle is a wrong approach. The way we would do this is we would just keep a rectangle. But if you do really want to make a square, then maybe there is a factory method that you can make to manufacture a square or you can have some sort of get is square, for example, where you return a boolean value when the width is equal to the height.
