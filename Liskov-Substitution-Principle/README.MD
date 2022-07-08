@@ -49,3 +49,39 @@ let useIt = function (rc) {
 ```
 
 - The entire idea of making a square, as opposed to just defining it as a special case of rectangle is a wrong approach. The way we would do this is we would just keep a rectangle. But if you do really want to make a square, then maybe there is a factory method that you can make to manufacture a square or you can have some sort of get is square, for example, where you return a boolean value when the width is equal to the height.
+
+```javascript
+class Rectangle {
+  constructor(width, height) {
+    this._width = width;
+    this._height = height;
+  }
+
+  get width() {
+    return this._width;
+  }
+  get height() {
+    return this._height;
+  }
+
+  set width(value) {
+    this._width = value;
+  }
+  set height(value) {
+    this._height = value;
+  }
+
+  get area() {
+    return this._width * this._height;
+  }
+
+  // Below is the fix code which check if there is a square based on same width and height
+  get isSquare() {
+    return this._width === this._height;
+  }
+
+  toString() {
+    return `${this._width}×${this._height}`;
+  }
+}
+```
