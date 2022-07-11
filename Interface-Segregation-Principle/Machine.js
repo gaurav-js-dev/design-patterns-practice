@@ -23,12 +23,22 @@ class MultiFunctionPrinter extends Machine {
   }
 }
 
+class NotImplementedError extends Error {
+  constructor(name) {
+    let msg = `${name} is not implemented!`;
+    super(msg);
+    // maintain stack trace
+    if (Error.captureStackTrace)
+      Error.captureStackTrace(this, NotImplementedError);
+  }
+}
+
 class OldFashionedPrinter extends Machine {
   print(doc) {
     // ok
   }
 
-  // omitting this is the same as no-op impl
+  // omitting this is the same as no implementation
 
   // fax(doc) {
   //   // do nothing
@@ -36,5 +46,6 @@ class OldFashionedPrinter extends Machine {
 
   scan(doc) {
     // throw new Error('not implemented!');
+    throw new NotImplementedError("OldFashionedPrinter.scan");
   }
 }
