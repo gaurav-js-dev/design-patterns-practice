@@ -1,4 +1,4 @@
-### The Dependency Inversion Principle (DIP) states that high level modules should not depend on low level modules; both should depend on abstractions. Abstractions should not depend on details.
+### Interface Segregation Principle (ISP) states that no code should be forced to depend on methods it does not use. ISP splits interfaces that are very large into smaller and more specific ones so that clients will only have to know about the methods that are of interest to them.
 
 - We have a **Document** class in the system we have clients which want to implement different devices such as printers, multifunction printers, scanners and so on.
 
@@ -139,3 +139,5 @@ class Scanner {
   scan() {}
 }
 ```
+
+- This principle gives a few benefits, especially, if we have clients that are expected to provide a particular type into an API, you can formalize it this way and show it to them. But since it's not a strict contract, and since you can never make these methods properly abstract meaning, you have to give them some sort of body like we're doing here, then this all becomes a bit redundant. So, we have to consider pros and cons when applying this principle in JavaScript according to scenario.
