@@ -1,3 +1,5 @@
+class Document {}
+
 class Machine {
   constructor() {
     if (this.constructor.name === "Machine")
@@ -49,3 +51,6 @@ class OldFashionedPrinter extends Machine {
     throw new NotImplementedError("OldFashionedPrinter.scan");
   }
 }
+
+let printer = new OldFashionedPrinter();
+printer.scan();
