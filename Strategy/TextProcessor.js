@@ -28,16 +28,43 @@ class HtmlListStrategy extends ListStrategy {
         buffer.push(`  <li>${item}</li>`)
     }
 }
+class TextProcessor {
+    constructor(outputFormat) {
+        this.buffer = [];
+        this.setOutputFormat(outputFormat);
+    }
 
+    setOutputFormat(format) {
+        switch (format) {
+            case OutputFormat.markdown:
+                this.listStrategy = new MarkdownListStrategy();
+                break;
+            case OutputFormat.html:
+                this.listStrategy = new HtmlListStrategy();
+                break;
+        }
+    }
+    appendList(items) {
+        this.listStrategy.start(this.buffer);
+        for (let item of items)
+            this.listStrategy.addListItem(this.buffer, item);
+        this.listStrategy.end(this.buffer);
+    }
+    clear() {
+        this.buffer = [];
+    }
 
-setOutputFormat(format)
-{
-    switch (format) {
-        case OutputFormat.markdown:
-            this.listStrategy = new MarkdownListStrategy();
-            break;
-        case OutputFormat.html:
-            this.listStrategy = new HtmlListStrategy();
-            break;
+    toString() {
+        return this.buffer.join('\n');
     }
 }
+
+let tp = new TextProcessor(OutputFormat.markdown);
+tp.appendList(['abc', 'cd', 'gf']);
+console.log(tp.toString());
+
+tp.clear();
+tp.setOutputFormat(OutputFormat.html);
+tp.appendList(['eagle', 'demo', 'charlie']);
+console.log(tp.toString());
+
