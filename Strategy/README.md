@@ -57,6 +57,13 @@ class TextProcessor {
 
 - These strategies are all going to have some sort of base class. We will create a base class called ListStrategy.Now, this class is supposed to be abstract, but we're going to define the interface, that markdown strategy and HTML strategy both is used.
 
+- Below are three things that we need to add.
+
+  1.We need to make a start method and this is going to take a buffer argument where we actually add things.
+
+  2.We're going to have an end of method also taking the buffer argument.
+  3.We're also going to have an add list item method.Here we need the buffer, but we also need the text of the item that we're adding.
+
 ```javascript
 class ListStrategy {
   start(buffer) {}
@@ -64,3 +71,70 @@ class ListStrategy {
   addListItem(buffer, item) {}
 }
 ```
+
+- Notice that all of these methods empty. That means that when you inherit them, you don't necessarily have to provide your own definition. You can just allow the inheritance to take place, in which case you'll have a no up method.
+
+- Markdown does not need start and end. There is no start and end tag. Therefore you don't have to implement those methods.So in the case of a markdown strategy. Which obviously extends ListStrategy.We just need to override the addListItem.
+
+```javascript
+class MarkdownListStrategy extends ListStrategy {
+  addListItem(buffer, item) {
+    buffer.push(` * ${item}`);
+  }
+}
+```
+
+- HtmlListStrategy need all methods start, end and the addListItem
+
+```javascript
+class HtmlListStrategy extends ListStrategy {
+  start(buffer) {
+    buffer.push("<ul>");
+  }
+
+  end(buffer) {
+    buffer.push("</ul>");
+  }
+
+  addListItem(buffer, item) {
+    buffer.push(`  <li>${item}</li>`);
+  }
+}
+```
+
+- In TextProcessor class we're going to have a method called append list, which takes a bunch of items and append those items.
+
+```javascript
+class TextProcessor {
+  appendList(items) {
+    this.listStrategy.start(this.buffer);
+    for (let item of items) this.listStrategy.addListItem(this.buffer, item);
+    this.listStrategy.end(this.buffer);
+  }
+  clear() {
+    this.buffer = [];
+  }
+
+  toString() {
+    return this.buffer.join("\n");
+  }
+}
+```
+
+- Below we are using the text processor
+
+```javascript
+let tp = new TextProcessor(OutputFormat.markdown);
+// Let's begin with the markdown format and append list.
+tp.appendList(["abc", "cd", "gf"]);
+console.log(tp.toString());
+tp.clear();
+// We can again dynamically set it to the HTML format
+tp.setOutputFormat(OutputFormat.html);
+tp.appendList(["eagle", "demo", "charlie"]);
+console.log(tp.toString());
+```
+
+- This is very simple approach for defining the high level algorithm as we've done here in the append list while leaving the low level implementations to the inheritors of some class.We've introduced this list strategy class, which serves to define that every little strategy has to adopt and then you simply inherited to override the parts that you want, ignoring the parts that you don't notice, that for markdown strategy. We just reuse the base class ones because they're empty.
+
+**So this is how we define the strategies and this is how you use them as well.**
