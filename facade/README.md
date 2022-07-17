@@ -40,3 +40,50 @@ class Buffer extends Array
 }
 
 ```
+
+- How does an array of characters actually get presented on the screen? It gets presented through a view.We have a class called viewport, and the viewport is designed specifically for presenting a buffer or a part of the buffer.
+  Buffers can be massive for example, 10000 lines of characters because you want it to be scrollable.We want to be able to go back and scroll up to your previous entries.But of course, you don't have that much space on the screen.
+  So viewport kind of constrains that.
+
+- A viewport reference is a buffer, but it also defines which part of the buffer user is actually looking at.
+
+- So in the constructor of a viewport, we specify a buffer and provide defaults.If we're constructing a viewport without a buffer, well, let's create a new buffer with default parameters.We would store the buffer references to the but in addition, we might want to define an offset in the buffer where user is actually looking, where user is getting data from.
+
+```Javascript
+class Viewport
+{
+  constructor(buffer=new Buffer())
+  {
+    this.buffer = buffer;
+    this.offset = 0;
+  }
+}
+```
+
+- Viewport can give you an ability to append text to that viewport.Appending text to a viewport doesn't really make sense because if viewport is just a view into something, but we will define and append method as a way of just just making it really convenient to add a chunk of text at a particular position relative to the viewport.
+
+- So this is something that you might commonly do through a viewport rather than going directly into the buffer.In addition, you might have kind of lower level kind of APIs, for example, being able to get a character at a particular index simply using the viewport to look into the buffer at a particular offset and getting that character, because this is how you typically print letters to the console. So here you would return this buffer at a particular position like this that offsets plus index in getCharAt method in below code.
+
+```Javascript
+
+class Viewport
+{
+  constructor(buffer=new Buffer())
+  {
+    this.buffer = buffer;
+    this.offset = 0;
+  }
+
+  // high-level
+  append(text, pos)
+  {
+    //We take the associated buffer and then we would write the text to that buffer and the position would be the position provided, plus the offset of the original viewport.
+    this.buffer.write(text, pos + this.offset);
+  }
+
+  getCharAt(index)
+  {
+    return this.buffer[this.offset + index];
+  }
+}
+```
