@@ -28,11 +28,24 @@ class Viewport {
 }
 
 class Console {
-  constructor() {}
+  constructor() {
+    this.buffer = new Buffer();
+    this.currentViewport = new Viewport(this.buffer);
+    this.buffers = [this.buffer];
+    this.viewports = [this.currentViewport];
+  }
 
   // high-level
-  write(text) {}
+  write(text) {
+    this.currentViewport.buffer.write(text);
+  }
 
   // low-level
-  getCharAt(index) {}
+  getCharAt(index) {
+    return this.currentViewport.getCharAt(index);
+  }
 }
+
+let c = new Console();
+c.write("hello");
+let ch = c.getCharAt(0);
