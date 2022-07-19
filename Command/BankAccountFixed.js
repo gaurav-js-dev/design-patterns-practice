@@ -51,6 +51,7 @@ class BankAccountCommand {
 
   undo() {
     {
+      // So if the operation or transaction did not succeed, we obviously do not try to roll it back.
       if (!this.succeeded) return;
       switch (this.action) {
         case Action.deposit:
