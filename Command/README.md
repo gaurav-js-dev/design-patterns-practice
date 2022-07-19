@@ -38,3 +38,20 @@ class BankAccount
 }
 
 ```
+
+- We can start operating on the bank account by running this code below and everything just works fine.
+
+```Javascript
+BankAccount.overdraftLimit = -500;
+
+let ba = new BankAccount(100);
+ba.deposit(100);
+console.log(ba.toString());
+
+// Output for console is below ->
+
+// Deposited $100 balance is now $200
+// Balance: $200
+```
+
+- One of the problems that the **Command pattern** is trying to solve is being able to record the fact that this change took place that somebody deposited $100 so we can audit that information also we can revert or roll back this deposit later on.This is what we're going to implement.
