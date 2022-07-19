@@ -87,3 +87,48 @@ class Viewport
   }
 }
 ```
+
+- We're getting something that's rather complicated.Mostly we don't even think about Consoles in terms of Buffer's or viewports.We just want to call console.We want to console with a single buffer, a single viewport and a sensible set of defaults basically.
+
+- That's exactly where the facade pattern comes in because Console is effectively a facade for all of those things that we brought to a console is a facade for a subsystem related to buffers and buffer management.It's a subsystem related to viewport and if we're talking about algorithms then all of this becomes really complicated
+  and we just want a facade.You just want the classical console that somebody can call the constructor for, get a sensible set of defaults and get up and running quickly.
+
+- Advanced users who want multiple buffers, who want multiple viewpoints, they can take below facade and they can customize it.We can provide high level methods for the console to operate on the underlying buffer.This is a very nice wrapper around multiple subsystems.But we can also make advanced uses so we can expose the lower level APIs through the facade.
+
+```Javascript
+
+class Console
+{
+  constructor()
+  {
+    this.buffer = new Buffer();
+    this.currentViewport = new Viewport(
+      this.buffer
+    );
+    this.buffers = [this.buffer];
+    this.viewports = [this.currentViewport];
+  }
+
+  // high-level
+  write(text)
+  {
+    this.currentViewport.buffer.write(text);
+  }
+  //So, for example, if you want to get a character at a particular position, we can expose that as well through this method for a power user where you would return this current viewport and once again, you would call get Char at at a particular index.
+  // low-level
+  getCharAt(index)
+  {
+    return this.currentViewport.getCharAt(index);
+  }
+}
+```
+
+- This all is still hiding some of the implementation details and as a result, those implementation details can actually change.So the facade gets you lots of benefits because you can change the implementation details without really affecting the user in any way, because all the user has to do. For eg write hello to the console and that would output in a two dimensional grid of characters. You have some access to low level APIs if you want to. So if you want a character and particular position, you can say C get character from position zero. in below code
+
+```Javascript
+
+let c = new Console();
+c.write('hello');
+let ch = c.getCharAt(0);
+
+```
