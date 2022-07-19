@@ -38,6 +38,24 @@ class BankAccountCommand {
   }
 
   call() {
-    // Add a switch case to call this command
+    switch (this.action) {
+      case Action.deposit:
+        this.account.deposit(this.amount);
+        this.succeeded = true;
+        break;
+      case Action.withdraw:
+        this.succeeded = this.account.withdraw(this.amount);
+        break;
+    }
+  }
+
+  undo() {
+    // to do rollback a transaction
   }
 }
+
+let ba = new BankAccount(100);
+
+let cmd = new BankAccountCommand(ba, Action.deposit, 50);
+cmd.call();
+console.log(ba.toString());
