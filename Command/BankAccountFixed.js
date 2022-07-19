@@ -12,9 +12,9 @@ class BankAccount {
     if (this.balance - amount >= BankAccount.overdraftLimit) {
       this.balance -= amount;
       console.log(`Withdrew ${amount}, balance is now ${this.balance}`);
-      return true;
+      return true; // transaction succeeded
     }
-    return false;
+    return false; // transaction failed
   }
 
   toString() {
@@ -34,7 +34,7 @@ class BankAccountCommand {
     this.account = account;
     this.action = action;
     this.amount = amount;
-    this.succeeded = false;
+    this.succeeded = false; // keep a track if command failed
   }
 
   call() {
@@ -50,7 +50,17 @@ class BankAccountCommand {
   }
 
   undo() {
-    // to do rollback a transaction
+    {
+      if (!this.succeeded) return;
+      switch (this.action) {
+        case Action.deposit:
+          this.account.withdraw(this.amount);
+          break;
+        case Action.withdraw:
+          this.account.deposit(this.amount);
+          break;
+      }
+    }
   }
 }
 
@@ -58,4 +68,8 @@ let ba = new BankAccount(100);
 
 let cmd = new BankAccountCommand(ba, Action.deposit, 50);
 cmd.call();
+console.log(ba.toString());
+
+console.log("Performing undo:");
+cmd.undo();
 console.log(ba.toString());
