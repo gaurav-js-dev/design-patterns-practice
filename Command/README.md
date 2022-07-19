@@ -75,6 +75,29 @@ class BankAccountCommand {
 }
 ```
 
+- Now what we need to call this above command to invoke this command in order to make the change actually happen. So we will add a method name Call and we will take a look at the action that the user has requested. Is it a deposit or a withdrawal?So if it is a deposit case, action deposit.
+
+```Javascript
+
+class BankAccountCommand {
+  constructor(account, action, amount) {
+    //
+  }
+
+  call() {
+    switch (this.action) {
+      case Action.deposit:
+        this.account.deposit(this.amount);
+        this.succeeded = true;
+        break;
+      case Action.withdraw:
+        this.succeeded = this.account.withdraw(this.amount);
+        break;
+    }
+  }
+}
+```
+
 - We have to somehow track whether a particular command actually succeeded or not in a state through this.succeeded we going to return either true or false, depending on whether it succeeded.
 
 ```Javascript
@@ -105,7 +128,15 @@ class BankAccount {
 - So if the operation itself didn't succeed and therefore the balance never altered even after you perform the on the operation of undo.
 
 ```Javascript
+class BankAccountCommand {
+  constructor(account, action, amount) {
+    //
+  }
 
+  call() {
+   //
+    }
+  }
   undo() {
     {
       // So if the operation or transaction did not succeed, we obviously do not try to roll it back.
