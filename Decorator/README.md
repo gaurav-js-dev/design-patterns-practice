@@ -60,3 +60,37 @@ class Circle extends Shape
 - Now the problem is how do we get the circle to print information about this color inside its toString method? Because we want to print here that we have a red circle of radius so. But unfortunately, you are unable to do it without also modifying the circle class.So eventually we end up modifying basically the entire inheritance hierarchy.
 
 - So modifying either the base class or the inheritance might not be the best idea because it violates open-closed principle and classes should be closed for modification.
+
+- To Solve about let's make a class ColoredShape with color and shape property and it will be able to print out shape with color.
+
+```Javascript
+class ColoredShape extends Shape
+{
+  constructor(shape, color)
+  {
+    super();
+    this.shape = shape;
+    this.color = color;
+  }
+
+  toString()
+  {
+    return `${this.shape.toString()} ` +
+      `has the color ${this.color}`;
+  }
+}
+
+let circle = new Circle(2);
+console.log(circle.toString());
+//Output
+// A circle of radius 2
+```
+
+- We can decorate this above so we can make a red circle and that's going to be our colored shape decorator where the first argument is the shape and the second argument is the color red.
+
+```Javascript
+let redCircle = new ColoredShape(circle, 'red');
+console.log(redCircle.toString());
+//Output
+// A circle of radius 2 has the color red
+```
