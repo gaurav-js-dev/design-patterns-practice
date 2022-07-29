@@ -17,7 +17,6 @@ class Person
 
 ```Javascript
 
-
 class ChatRoom
 {
   constructor()
@@ -25,6 +24,14 @@ class ChatRoom
     this.people = [];
     //People who are in chat room.
   }
+
+  receive(sender, message)
+  {
+    let s = `${sender}: '${message}'`;
+    console.log(`[${this.name}'s chat session] ${s}`);
+    this.chatLog.push(s);
+  }
+
   // Broadcast method but don't broadcast message to the same person who joined that chat.
   broadcast(source, message)
   {
@@ -32,7 +39,7 @@ class ChatRoom
       if (p.name !== source)
         p.receive(source, message);
   }
- // When someone joins chatroom show this message with name to everyone
+ // When someone joins chatroom show this message with name to everyone and also add him to list of people
   join(p)
   {
     let joinMsg = `${p.name} joins the chat`;
@@ -40,7 +47,7 @@ class ChatRoom
     p.room = this;
     this.people.push(p);
   }
-
+ // Direct message method
   message(source, destination, message)
   {
     for (let p of this.people)
