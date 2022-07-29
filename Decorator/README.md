@@ -94,3 +94,36 @@ console.log(redCircle.toString());
 //Output
 // A circle of radius 2 has the color red
 ```
+
+- We can also compose decorator's, which means that you can wrap decorator's around other decorator's imagine, we have yet another decorator, for making shapes transparent.
+
+```Javascript
+
+class TransparentShape extends Shape
+{
+  constructor(shape, transparency)
+  {
+    super();
+    this.shape = shape;
+    this.transparency = transparency;
+  }
+
+  toString()
+  {
+    return `${this.shape.toString()} has ` +
+      `${this.transparency * 100.0}% transparency`;
+  }
+}
+```
+
+- I can apply above TransparentShape to the colored shape decorator and have a twice decorated object so
+  Let's say we'll have a half transparent red circle.
+
+```Javascript
+//You can see that we're reusing the underlying functionality twice.
+let redHalfCircle = new TransparentShape(redCircle, 0.5);
+
+console.log(redHalfCircle.toString());
+//Output
+// A circle of radius 2 has the color red has 50% transparency
+```

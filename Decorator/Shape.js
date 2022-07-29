@@ -1,12 +1,4 @@
 class Shape {}
-
-// class Shape {
-//     constructor(color)
-//     {
-//       this.color = color;
-//     }
-//   }
-
 class Circle extends Shape {
   constructor(radius = 0) {
     super();
@@ -34,8 +26,26 @@ class ColoredShape extends Shape {
   }
 }
 
+class TransparentShape extends Shape {
+  constructor(shape, transparency) {
+    super();
+    this.shape = shape;
+    this.transparency = transparency;
+  }
+
+  toString() {
+    return (
+      `${this.shape.toString()} has ` +
+      `${this.transparency * 100.0}% transparency`
+    );
+  }
+}
+
 let circle = new Circle(2);
 console.log(circle.toString());
 
 let redCircle = new ColoredShape(circle, "red");
 console.log(redCircle.toString());
+
+let redHalfCircle = new TransparentShape(redCircle, 0.5);
+console.log(redHalfCircle.toString());
