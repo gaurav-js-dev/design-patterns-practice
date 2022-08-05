@@ -13,6 +13,10 @@ class Person {
   say(message) {
     this.room.broadcast(this.name, message);
   }
+
+  pm(who, message) {
+    this.room.message(this.name, who, message);
+  }
 }
 
 class ChatRoom {
@@ -37,3 +41,20 @@ class ChatRoom {
       if (p.name === destination) p.receive(source, message);
   }
 }
+
+let room = new ChatRoom();
+
+let john = new Person("John");
+let jane = new Person("Jane");
+
+room.join(john);
+room.join(jane);
+
+john.say("hi room");
+jane.say("oh, hey john");
+
+let simon = new Person("Simon");
+room.join(simon);
+simon.say("hi everyone!");
+
+jane.pm("Simon", "glad you could join us!");

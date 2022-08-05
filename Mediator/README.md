@@ -74,3 +74,46 @@ class ChatRoom
   }
 }
 ```
+
+- Let's create a new chat room.There are two users John and Jane. Maybe John and Jane both posts some things to the room.
+
+- Later, We have another user Simon who joins the chat room and he broadcast a message and also received a private message from Jane.
+
+```Javascript
+let room = new ChatRoom();
+
+let john = new Person("John");
+let jane = new Person("Jane");
+
+room.join(john);
+room.join(jane);
+
+john.say("hi room");
+jane.say("oh, hey john");
+
+let simon = new Person("Simon");
+room.join(simon);
+simon.say("hi everyone!");
+
+jane.pm("Simon", "glad you could join us!");
+
+//Output
+
+// [John's chat session] room: 'Jane joins the chat'
+
+// [Jane's chat session] John: 'hi room'
+
+// [John's chat session] Jane: 'oh, hey john'
+
+// [John's chat session] room: 'Simon joins the chat'
+
+// [Jane's chat session] room: 'Simon joins the chat'
+
+// [John's chat session] Simon: 'hi everyone!'
+
+// [Jane's chat session] Simon: 'hi everyone!'
+
+// [Simon's chat session] Jane: 'glad you could join us!'
+```
+
+- Takeaway from this pattern is that ChatRoom is the mediator here.The chat room is the central component that everyone has a reference to, but nobody has any direct references to one another, which means that a person is unaware of any other people being present, although when you do private messaging, you are, of course, directing it to some person's name.
