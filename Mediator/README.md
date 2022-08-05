@@ -15,7 +15,31 @@ class Person
 
 - ChatRoom class is the component that relays a message from one person to either every single other person to a particular person in the case of private messaging.
 
+- To understand pattern and it's benefits please look at comments of below code and follow it step by step.
+
 ```Javascript
+
+class Person
+{
+  constructor() {
+    //
+  }
+  // A person can receive message from a sender
+  receive(sender, message)
+  {
+    let s = `${sender}: '${message}'`;
+    console.log(`[${this.name}'s chat session] ${s}`);
+    this.chatLog.push(s);
+  }
+    // A person broadcasting the message
+    say(message) {
+    this.room.broadcast(this.name, message);
+  }
+    // A private message from one person to another person.
+    pm(who, message){
+    this.room.message(this.name, who, message);
+  }
+}
 
 class ChatRoom
 {
@@ -23,13 +47,6 @@ class ChatRoom
   {
     this.people = [];
     //People who are in chat room.
-  }
-
-  receive(sender, message)
-  {
-    let s = `${sender}: '${message}'`;
-    console.log(`[${this.name}'s chat session] ${s}`);
-    this.chatLog.push(s);
   }
 
   // Broadcast method but don't broadcast message to the same person who joined that chat.
@@ -47,10 +64,11 @@ class ChatRoom
     p.room = this;
     this.people.push(p);
   }
- // Direct message method
+ // Direct message method from one person to another
   message(source, destination, message)
   {
     for (let p of this.people)
+    // only desired person receives the message
       if (p.name === destination)
         p.receive(source, message);
   }
