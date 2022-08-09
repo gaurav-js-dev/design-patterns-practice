@@ -96,3 +96,18 @@ class RasterRenderer
   }
 }
 ```
+
+```Javascript
+// So we'll have a roster and vector renderer.
+let raster = new RasterRenderer();
+let vector = new VectorRenderer();
+// We have to specify the render that we want to use, like the vector render, for example, and then specify the radius as well.
+let circle = new Circle(vector, 5);
+// we can draw the circle
+circle.draw();
+// We can take the circle and resize it using its own method.So double the radius and then draw the circle again.
+circle.resize(2);
+circle.draw();
+```
+
+- This does get us away from having too many classes.The take away from this example is that the bridge design pattern is just a way of connecting to hierarchies of objects together. So here we have a hierarchy of shapes. We have a hierarchy of renderers, even though we haven't given them any common base class.But you can think of them as related objects and then we have the bridge itself and the bridge itself happens right here inside Class Shape constructor .
