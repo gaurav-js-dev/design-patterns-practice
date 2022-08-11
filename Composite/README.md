@@ -57,4 +57,25 @@ class GraphicObject
 
 ```
 
-- If the children collection, then we can suddenly make it just contain all the graphic objects inside it but we need standalone concrete implementation also.
+- If the children collection, then we can suddenly make it just contain all the graphic objects inside it but we need standalone concrete implementation also.Let's make a circle and square which extends graphic objects.
+
+```Javascript
+class Circle extends GraphicObject
+{
+  constructor(color)
+  {
+    super('Circle');
+    this.color = color;
+  }
+}
+
+class Square extends GraphicObject
+{
+  constructor(color)
+  {
+    super('Square');
+    this.color = color;
+  }
+}
+
+```
