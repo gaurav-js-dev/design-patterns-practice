@@ -39,3 +39,14 @@ class Square extends GraphicObject {
     this.color = color;
   }
 }
+
+let drawing = new GraphicObject();
+drawing.children.push(new Square("Red"));
+drawing.children.push(new Circle("Yellow"));
+
+let group = new GraphicObject();
+group.children.push(new Circle("Blue"));
+group.children.push(new Square("Blue"));
+drawing.children.push(group);
+
+console.log(drawing.toString());

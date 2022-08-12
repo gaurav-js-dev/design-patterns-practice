@@ -100,7 +100,16 @@ group.children.push(new Square('Blue')); // make a square circle
 drawing.children.push(group); // add this group as another element of the drawing
 
 console.log(drawing.toString());
+// Star represents the hierarchy Group 0 has it's own children and Group 1 inside it. Ground 1 inside group 0 has blue circle and square
 // output
-
-
+Group 0
+* Red Square
+* Yellow Circle
+* Group 1
+** Blue Circle
+** Blue Square
 ```
+
+- We have just added a group into a group and you can have groups of groups of groups to infinity.There is no limit to how this whole thing actually goes. Above what's happening here is that circles and squares and entire graphic objects get treated in a uniform manner in the sense that when you call to a string, whether it's a scalar object or singular object or it's a container or a collection of different objects, it doesn't really matter.It's always going to be printed correctly because while we've implemented this correctly
+
+- GraphicObject has collection of children, a list which is initially empty, but you can add elements to it and subsequently you can turn this into a fully fledged container.So that's the whole idea of the composite design pattern, basically treating singular objects and collections of objects in a uniform manner and in this case, it's done through a base class because a single based class is used for both scalar objects and it's also used by itself whenever you actually want a container of some kind.
