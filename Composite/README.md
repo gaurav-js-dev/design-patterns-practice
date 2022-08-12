@@ -22,8 +22,8 @@ class GraphicObject
     this.color = undefined;
     this._name = name;
   }
-  GraphicObject.count = 0;
 }
+  GraphicObject.count = 0;
 ```
 
 - We want to print not just the object, but also everything that it contains with print method as below inside GraphicObject.
@@ -77,5 +77,30 @@ class Square extends GraphicObject
     this.color = color;
   }
 }
+
+```
+
+- This above let us construct an object which consists of several other graphic objects. So, for example, I can make a drawing, so drawing because new graphic object.
+
+```Javascript
+// Make a drawing first as group 0 then we can take the children from drawing then start.
+let drawing = new GraphicObject();
+// Make a drawing first as group 0 then we can take the children from drawing then start.
+drawing.children.push(new Square('Red'));
+drawing.children.push(new Circle('Yellow'));
+```
+
+- Above this is fairly simple stuff, but this stuff does not represent the composite design pattern, the composite design pattern is the next part, because what we make a group that's part of this entire drawing so we can make a group which is a new graphic object that's going to be grouped.
+
+```Javascript
+
+let group = new GraphicObject();
+group.children.push(new Circle('Blue')); // make a blue circle
+group.children.push(new Square('Blue')); // make a square circle
+drawing.children.push(group); // add this group as another element of the drawing
+
+console.log(drawing.toString());
+// output
+
 
 ```
