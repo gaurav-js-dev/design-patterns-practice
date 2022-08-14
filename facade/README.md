@@ -1,5 +1,17 @@
 #### Facade pattern hides the complexities of the system and provides an interface to the client using which the client can access the system. This type of design pattern comes under structural pattern as this pattern adds an interface to existing system to hide its complexities.
 
+## Advantages
+
+- Minimizes complexity of sub-systems
+- Aids principle of loose coupling
+- Software becomes more flexible and easily expandable
+
+## Disadvantages
+
+- Complex implementation (especially with existing code)
+- Approach is coupled to an additional level of indirection
+- High degree of dependence at facade interface
+
 - This example is going to be synthetic. We won't add any code that actually runs because facade typically involves complex subsystems and we cannot really implement with small code snippets or build anything of sufficient complexity.This example contains valid JavaScript code.
 
 - This example relates to the console, like the console that we use to output text. We might think that the console is a really single kind of construct.It doesn't really require a facade because it's just a single system.It is not true in actual they are really complicated because they involve several different classes.

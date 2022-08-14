@@ -10,7 +10,7 @@
 
 ### Repo and Folder structure
 
-- There is a dedicated folder for each pattern/principle and this folder contains few files. If there file ending with **fixed** contains optimized code and other file contains the code before refactoring or when pattern was not applied. If there is just **one** js file then it is the actual optimized code.
+- There is a dedicated folder for each pattern/principle and this folder contains few files. If there file ending with **fixed** or file named as **ExampleWithPattern.js** contains optimized code and other file contains the code before refactoring or when pattern was not applied. If there is just **one** js file then it is the actual optimized code. A folder may contain more than one example this way.
 
 - Each Folder also contains a readme file which explains why & how the design pattern is applied to the existing code and what and how are the advantages gained after applying the principle to the existing code. It also explains code snippets line by line.
 
