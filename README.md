@@ -10,23 +10,22 @@
 
 ### Repo and Folder structure
 
-- There is a dedicated folder for each pattern/principle and this folder contains few files. If there file ending with **fixed** contains optimized code and other file contains the code before refactoring or when pattern was not applied. If there is just **1** js file then it is the actual optimized code.
+- There is a dedicated folder for each pattern/principle and this folder contains few files. If there file ending with **fixed** contains optimized code and other file contains the code before refactoring or when pattern was not applied. If there is just **one** js file then it is the actual optimized code.
 
 - Each Folder also contains a readme file which explains why & how the design pattern is applied to the existing code and what and how are the advantages gained after applying the principle to the existing code. It also explains code snippets line by line.
 
 ## Usage
 
-- There are folders created for each design pattern. To run the code first cd into desired folder with below command.
+- There are folders created for each design pattern.After cloning this repo to run the code first cd into desired folder with below command.
 
 1.
 
 ```
-{
-        $ cd facade
-}
+    $ cd facade
 ```
 
 - After selecting the desired design pattern folder as current working directory please execute node as project is based on Javascript. Enter the file name after node and hit enter you will see the output. To understand output please refer to readme file with code follow along in it.
-  {
-  $ node Buffer.js
-  }
+
+```
+    $ node Buffer.js
+```
