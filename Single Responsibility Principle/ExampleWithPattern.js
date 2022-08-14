@@ -5,7 +5,24 @@ class GradeCalculator {
     this.grades = gradesToCalculate;
   }
 
-  calculateGrades() {}
+  calculateGrades() {
+    const mathUtil = new MathUtils();
+    const total = mathUtil.getSummationOfArrayOfNumbers(this.grades);
+    const average = mathUtil.getQuotientOfTwoNumbers(total, this.grades.length);
+    displayResult(average);
+  }
 }
 
-class MathUtils {}
+class MathUtils {
+  getSummationOfArrayOfNumbers(arrayOfNumbers) {
+    return arrayOfNumbers.reduce((a, b) => a + b);
+  }
+
+  getQuotientOfTwoNumbers(number1, number2) {
+    return number1 / number2;
+  }
+}
+
+const displayResult = (result) => {
+  console.log("The result is: ", result);
+};
