@@ -1,29 +1,21 @@
-class BankAccount {
-  constructor(balance = 0) {
-    this.balance = balance;
+class Calculator {
+  constructor() {
+    this.value = 0;
   }
 
-  deposit(amount) {
-    this.balance += amount;
-    console.log(`Deposited ${amount}, balance is now ${this.balance}`);
+  add(valueToAdd) {
+    this.value = this.value + valueToAdd;
   }
 
-  withdraw(amount) {
-    if (this.balance - amount >= BankAccount.overdraftLimit) {
-      this.balance -= amount;
-      console.log(`Withdrew ${amount}, balance is now ${this.balance}`);
-      return true;
-    }
-    return false;
+  subtract(valueToSubtract) {
+    this.value = this.value - valueToSubtract;
   }
 
-  toString() {
-    return `Balance: ${this.balance}`;
+  multiply(valueToMultiply) {
+    this.value = this.value * valueToMultiply;
+  }
+
+  divide(valueToDivide) {
+    this.value = this.value / valueToDivide;
   }
 }
-
-BankAccount.overdraftLimit = -500;
-
-let ba = new BankAccount(100);
-ba.deposit(100);
-console.log(ba.toString());
