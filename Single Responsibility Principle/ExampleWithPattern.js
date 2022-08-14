@@ -26,3 +26,7 @@ class MathUtils {
 const displayResult = (result) => {
   console.log("The result is: ", result);
 };
+
+const gc = new GradeCalculator(JAMES_MATHEMATICS);
+
+gc.calculateGrades();
