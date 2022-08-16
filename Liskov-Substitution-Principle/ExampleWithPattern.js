@@ -21,10 +21,42 @@ class Developer {
   }
 }
 
-class ReactDeveloper extends Developer {}
-class NodeJSDeveloper extends Developer {}
+class ReactDeveloper extends Developer {
+  createCICDPipeline() {
+    throw Error("It's not my responsibility");
+  }
+  createDatabaseTable() {
+    throw Error("I am not a Back-end Developer");
+  }
 
-class JenkinsDevOpsEngineer extends Developer {}
+  createEndpoints() {
+    throw Error("That's for the Back-end");
+  }
+}
+
+class NodeJSDeveloper extends Developer {
+  createHTML() {
+    throw Error("I ain't a Front-end Developer");
+  }
+
+  createCICDPipeline() {
+    throw Error("I am not a DevOps Engineer");
+  }
+}
+
+class JenkinsDevOpsEngineer extends Developer {
+  createHTML() {
+    throw Error("I don't do that");
+  }
+
+  createDatabaseTable() {
+    throw Error("I'm not supposed to do that");
+  }
+
+  createEndpoints() {
+    throw Error("That's not my responsibility");
+  }
+}
 
 const frontEndDeveloper = ({ name, company }) => ({
   createHTML: () => {
@@ -60,3 +92,15 @@ const fullStackDeveloper = ({ name, company }) => {
     ...devOpsEngineer(developer),
   };
 };
+
+new ReactDeveloper("test", "test").createHTML();
+
+const kazuyaTheFullStackDeveloper = fullStackDeveloper({
+  name: "Kazuya",
+  company: "ABC Company",
+});
+
+kazuyaTheFullStackDeveloper.createCICDPipeline();
+kazuyaTheFullStackDeveloper.createEndpoints();
+kazuyaTheFullStackDeveloper.createHTML();
+kazuyaTheFullStackDeveloper.createDatabaseTable();
